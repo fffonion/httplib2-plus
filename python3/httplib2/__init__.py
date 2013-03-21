@@ -737,8 +737,9 @@ def proxy_info_from_environment(method='http'):
     if method not in ('http', 'https'):
         return
 
-    env_var = method + '_proxy'
-    url = os.environ.get(env_var, os.environ.get(env_var.upper()))
+    #env_var = method + '_proxy'
+    #url = os.environ.get(env_var, os.environ.get(env_var.upper()))
+    url = urllib.getproxies()[method]
     if not url:
         return
     return proxy_info_from_url(url, method)
@@ -770,7 +771,8 @@ def proxy_info_from_url(url, method='http'):
     else:
         port = dict(https=443, http=80)[method]
 
-    proxy_type = 3 # socks.PROXY_TYPE_HTTP
+    if method=='http':proxy_type = 4 # socks.PROXY_TYPE_HTTP_NO_TUNNEL
+    elif methond=='https':proxy_type = 3 # socks.PROXY_TYPE_HTTP, will use CONNECT tunnel
     return ProxyInfo(
         proxy_type = proxy_type,
         proxy_host = host,
