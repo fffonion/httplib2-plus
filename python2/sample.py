@@ -7,5 +7,3 @@ h = httplib2.Http(callback_hook=hooker,chunk_size=1000)
 resp, content = h.request("http://www.roame.net")
 print resp
 print len(content)
-import urllib22
-proxy_support = urllib22.ProxyHandler()
