@@ -1,6 +1,6 @@
 from __future__ import generators
 """
-httplib2
+httplib2plus
 
 A caching http interface that supports ETags and gzip
 to conserve bandwidth.
@@ -794,9 +794,10 @@ def proxy_info_from_environment(method='http'):
         return
     
     #env_var = method + '_proxy'
-    url = urllib.getproxies()[method]
+    url = urllib.getproxies()
     if not url:
         return
+    else:url=url[method]
     pi = proxy_info_from_url(url, method)
     
     #pi=urllib.getproxies()
@@ -1321,7 +1322,7 @@ class Http(object):
                         while 1:
                             chunk= response.read(self.chunk_size)
                             if not chunk:break
-                            self.callback_hook()
+                            self.callback_hook(len(chunk),len(content))
                             content +=chunk
                     else:
                         content = response.read()
