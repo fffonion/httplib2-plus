@@ -3,16 +3,18 @@ RGSS3Doc
 
 What's diff in httplib2-plus
 --------------------
-**Add chunk read support
+##Add chunk read support
+
+Usage:
 ```python
 import httplib2
-def my_call_back(has_read,total):
+def my_call_back(has_read,total):#the callback hook func
 	print ("%d %d %f" %(has_read,total,has_read*100.0/total))
-
 http=httplib2.Http()
-resp,content=http.request('http://www.google.com/',callback_hook=my_call_back)
+resp,content=http.request('http://www.google.com/',callback_hook=my_call_back)#use callback_hook= to define a func
 ```
 
-**fix proxy bugs
+##fix proxy bugs
+
 httplib2 does not check registry for proxy settings. It only check the environment vars.
 In httplib2-plus this is solved. Using "urllib.getproxies()"
