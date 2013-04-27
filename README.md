@@ -1,8 +1,8 @@
-RGSS3Doc
+httplib2-plus Document
 ========
 
-What's diff in httplib2-plus
---------------------
+What's different in this version?
+
 ##Add chunk read support
 
 Usage:
@@ -18,3 +18,5 @@ resp,content=http.request('http://www.google.com/',callback_hook=my_call_back)#u
 
 httplib2 does not check registry for proxy settings. It only check the environment vars.
 In httplib2-plus this is solved. Using "urllib.getproxies()"
+
+##forked from the version 0.8
