@@ -1,4 +1,4 @@
-RGSS3Doc
+httplib2-plus Document
 ========
 
 What's diff in httplib2-plus
