@@ -1026,11 +1026,15 @@ class Http(object):
                     conn.close()
                 else:
                     if callback_hook:#!= None:
-                        while 1:
-                            chunk= response.read(chunk_size)
-                            if not chunk:break
-                            callback_hook()
-                            content +=chunk
+                        if not chunk_size:#==None:
+                            content=''
+                            conn.close()
+                        else:
+                            while 1:
+                                chunk= response.read(chunk_size)
+                                if not chunk:break
+                                callback_hook(len(chunk),len(content))
+                                content +=chunk
                     else:
                         content = response.read()
                 response = Response(response)
