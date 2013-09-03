@@ -1322,11 +1322,15 @@ class Http(object):
                     conn.close()
                 else:
                     if callback_hook:#!= None:
-                        while 1:
-                            chunk= response.read(chunk_size)
-                            if not chunk:break
-                            callback_hook(len(chunk),len(content))
-                            content +=chunk
+                        if not chunk_size:#==None:
+                            content=''
+                            conn.close()
+                        else:
+                            while 1:
+                                chunk= response.read(chunk_size)
+                                if not chunk:break
+                                callback_hook(len(chunk),len(content))
+                                content +=chunk
                     else:
                         content = response.read()
                 response = Response(response)
@@ -1350,7 +1354,7 @@ class Http(object):
         if auth:
             if auth.response(response, body):
                 auth.request(method, request_uri, headers, body)
-                (response, content) = self._conn_request(conn, request_uri, method, body, headers ,callback_hook, chunk_size)
+                (response, content) = self._conn_request(conn, request_uri, method, body, headers )
                 response._stale_digest = 1
 
         if response.status == 401:
