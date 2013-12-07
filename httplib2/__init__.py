@@ -825,11 +825,13 @@ class HTTPSConnectionWithTimeout(http.client.HTTPSConnection):
                 context.load_cert_chain(cert_file, key_file)
             if ca_certs:
                 context.load_verify_locations(ca_certs)
+            check_hostname = True
+            if disable_ssl_certificate_validation:
+                check_hostname = False
         http.client.HTTPSConnection.__init__(
                 self, host, port=port, key_file=key_file,
                 cert_file=cert_file, timeout=timeout, context=context,
-                check_hostname=True)
-
+                check_hostname=check_hostname)
 
 SCHEME_TO_CONNECTION = {
     'http': HTTPConnectionWithTimeout,
