@@ -4,7 +4,7 @@ except ImportError:
     from distutils.core import setup
 import sys
 
-pkgdir = {'': 'python%s' % sys.version_info[0]}
+pkgdir = {'': '.'}
 VERSION = '0.8'
 
 setup(name='httplib2',
